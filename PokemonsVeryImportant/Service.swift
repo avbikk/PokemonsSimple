@@ -16,7 +16,6 @@ func downloadInitialData(urlString: String, completion: @escaping InitialDataHan
     
     URLSession.shared.dataTask(with: url) { data, response, error in
         guard let data = data else { return }
-        
         guard String(data: data, encoding: .utf8) != nil else { return }        
         /// Decoding
         DispatchQueue.main.async {

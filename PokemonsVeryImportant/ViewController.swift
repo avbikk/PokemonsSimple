@@ -47,7 +47,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let jsonData = jsonData else { return }
+        if indexPath.row == jsonData.results.count-1 {
+            downloadInitialData(urlString: jsonData.next) { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .success(let resultJson):
+                    self.jsonData = resultJson
+                case .failure(let error):
+                    self.showAlert(errorValue: error.localizedDescription)
+                }
+                self.pokemonTableView.reloadData()
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let pokemons = jsonData?.results {
             let url = pokemons[indexPath.row].url
