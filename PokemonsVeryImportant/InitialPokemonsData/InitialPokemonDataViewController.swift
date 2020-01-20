@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  InitialPokemonDataViewController.swift
 //  PokemonsVeryImportant
 //
 //  Created by Alsu Bikkulova on 17/01/2020.
@@ -8,76 +8,69 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol InitialPokemonDataViewProtocol: AnyObject {
 
-    var jsonData: Response?
-    var pokemonTableView = UITableView()
+    func showAlert(errorValue: String)
+    func showInitialPokemonData(data: Response?)
+    func reloadPokemonsData(data: Response?)
+    
+}
+
+
+class InitialPokemonDataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, InitialPokemonDataViewProtocol {
+    
+    let assembly: PokemonAssemblyProtocol = PokemonAssembly()
+    var presenter: PokemonPresenterProtocol! = nil
+    
+    var initialPokemonsData: Response?
+    
+    var pokemonsTableView = UITableView()
     var buttonDescription = UIButton()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let urlStartString = "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
-        pokemonTableView = UITableView(frame: view.frame)
-        pokemonTableView.delegate = self
-        pokemonTableView.dataSource = self
-        view.addSubview(pokemonTableView)
-        
-        downloadInitialData(urlString: urlStartString) { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let resultJson):
-                self.jsonData = resultJson
-            case .failure(let error):
-                self.showAlert(errorValue: error.localizedDescription)
-            }
-            self.pokemonTableView.reloadData()
-        }
+        assembly.configure(with: self)
+        presenter.configureView()
     }
-
+    
+    func showInitialPokemonData(data: Response?) {
+        initialPokemonsData = data
+        pokemonsTableView = UITableView(frame: view.frame)
+        pokemonsTableView.delegate = self
+        pokemonsTableView.dataSource = self
+        view.addSubview(pokemonsTableView)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let pokemons = jsonData?.results else { return 20 }
+        guard let pokemons = initialPokemonsData?.results else { return 20 }
         return pokemons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        if let pokemons = jsonData?.results {
-            cell.textLabel?.text = pokemons[indexPath.row].name
+        if let pokemons = initialPokemonsData?.results {
+            cell.textLabel?.text = String(indexPath.row) + " " + pokemons[indexPath.row].name
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let jsonData = jsonData else { return }
-        if indexPath.row == jsonData.results.count-1 {
-            downloadInitialData(urlString: jsonData.next) { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success(let resultJson):
-                    self.jsonData = resultJson
-                case .failure(let error):
-                    self.showAlert(errorValue: error.localizedDescription)
-                }
-                self.pokemonTableView.reloadData()
-            }
-        }
+        guard let initialPokemonsData = initialPokemonsData else { return }
+        guard indexPath.row == initialPokemonsData.results.count-1 else { return }
+        presenter.showInitialPokemonsDataNextPage()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let pokemons = jsonData?.results {
-            let url = pokemons[indexPath.row].url
-            print("Url " + url)
-            downloadPokemonDetails(urlString: url, completion: { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .success(let resultJson):
-                    self.addDetailView(welcome: resultJson)
-                case .failure(let error):
-                    self.showAlert(errorValue: error.localizedDescription)
-                }
-            })
+        if let pokemons = initialPokemonsData?.results {
+            presenter.pokemonDetailsTapped(url: pokemons[indexPath.row].url)
         }
+    }
+    
+    func reloadPokemonsData(data: Response?) {
+        guard  let data = data else { return }
+        initialPokemonsData?.results.append(contentsOf: data.results)
+        pokemonsTableView.reloadData()
     }
     
     func addDetailView(welcome: Welcome) {
