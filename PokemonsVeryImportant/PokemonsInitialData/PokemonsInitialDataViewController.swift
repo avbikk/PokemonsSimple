@@ -1,5 +1,5 @@
 //
-//  InitialPokemonDataViewController.swift
+//  PokemonsInitialDataViewController.swift
 //  PokemonsVeryImportant
 //
 //  Created by Alsu Bikkulova on 17/01/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InitialPokemonDataViewProtocol: AnyObject {
+protocol PokemonsInitialDataViewProtocol: AnyObject {
 
     func showAlert(errorValue: String)
     func showInitialPokemonData(data: Response?)
@@ -16,11 +16,10 @@ protocol InitialPokemonDataViewProtocol: AnyObject {
     
 }
 
-
-class InitialPokemonDataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, InitialPokemonDataViewProtocol {
+class PokemonsInitialDataViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, PokemonsInitialDataViewProtocol {
     
-    let assembly: PokemonAssemblyProtocol = PokemonAssembly()
-    var presenter: PokemonPresenterProtocol! = nil
+    let assembly = PokemonsAssembly()
+    var presenter: PokemonsPresenterProtocol?
     
     var initialPokemonsData: Response?
     
@@ -29,9 +28,9 @@ class InitialPokemonDataViewController: UIViewController, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        assembly.configure(with: self)
-        presenter.configureView()
+        view.backgroundColor = .red
+        presenter?.configureView()
+        navigationItem.title = "Список покемонов"
     }
     
     func showInitialPokemonData(data: Response?) {
@@ -58,12 +57,12 @@ class InitialPokemonDataViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let initialPokemonsData = initialPokemonsData else { return }
         guard indexPath.row == initialPokemonsData.results.count-1 else { return }
-        presenter.showInitialPokemonsDataNextPage()
+        presenter?.showInitialPokemonsDataNextPage()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let pokemons = initialPokemonsData?.results {
-            presenter.pokemonDetailsTapped(url: pokemons[indexPath.row].url)
+            presenter?.pokemonDetailsTapped(url: pokemons[indexPath.row].url)
         }
     }
     
@@ -72,38 +71,11 @@ class InitialPokemonDataViewController: UIViewController, UITableViewDelegate, U
         initialPokemonsData?.results.append(contentsOf: data.results)
         pokemonsTableView.reloadData()
     }
-    
-    func addDetailView(welcome: Welcome) {
-        buttonDescription.removeFromSuperview()
-        let height: CGFloat = 150.0
-        let width: CGFloat = 300.0
-        buttonDescription = UIButton(frame: .zero)
-        buttonDescription.layer.cornerRadius = 0.3 * height
-        
-        buttonDescription.backgroundColor = .red
-        buttonDescription.tintColor = .black
-        let title = "Id = " + String(welcome.id) + "\n name = " + welcome.name + "\nisMainSeries = " + String(welcome.isMainSeries)
-        buttonDescription.setTitle(title, for: .normal)
-        buttonDescription.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping;
-        view.addSubview(buttonDescription)
-
-        /// Constraints
-        buttonDescription.translatesAutoresizingMaskIntoConstraints = false
-        buttonDescription.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        buttonDescription.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        buttonDescription.widthAnchor.constraint(equalToConstant: width).isActive = true
-        buttonDescription.heightAnchor.constraint(equalToConstant: height).isActive = true
-        buttonDescription.addTarget(self, action: #selector(removeButtonFromView), for: .touchUpInside)
-    }
-    
     func showAlert(errorValue: String) {
         let alertController = UIAlertController(title: "Ошибка загрузки", message: errorValue, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(alertAction)
         present(alertController, animated: true)
     }
-    
-    @objc func removeButtonFromView() {
-        buttonDescription.removeFromSuperview()
-    }
+
 }

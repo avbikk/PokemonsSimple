@@ -1,5 +1,5 @@
 //
-//  PokemonPresenterProtocol.swift
+//  PokemonsPresenterProtocol.swift
 //  PokemonsVeryImportant
 //
 //  Created by Alsu Bikkulova on 19/01/2020.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol PokemonPresenterProtocol: AnyObject {
+protocol PokemonsPresenterProtocol: AnyObject {
     
-    var router: PokemonRouterProtocol! { set get }
+    var router: PokemonsRouterProtocol? { set get }
     
     func configureView()
     func showInitialPokemonsData(data: Response?)
@@ -21,39 +21,39 @@ protocol PokemonPresenterProtocol: AnyObject {
     func pokemonDetailsTapped(url: String)
 }
 
-class PokemonPresenter: PokemonPresenterProtocol {
+class PokemonsPresenter: PokemonsPresenterProtocol {
     
-    weak var view: InitialPokemonDataViewProtocol!
-    var interactor: PokemonInteractorProtocol!
-    var router: PokemonRouterProtocol!
+    weak var view: PokemonsInitialDataViewProtocol?
+    var interactor: PokemonsInteractorProtocol?
+    var router: PokemonsRouterProtocol?
     
-    required init(view: InitialPokemonDataViewProtocol) {
+    init(view: PokemonsInitialDataViewProtocol) {
         self.view = view
     }
     
-    // MARK: - PokemonPresenterProtocol methods
+    // MARK: - PokemonsPresenterProtocol methods
     func configureView() {
-        interactor.downloadPokemonsList()
+        interactor?.downloadPokemonsList()
     }
     
     func showInitialPokemonsDataNextPage() {
-        interactor.downloadPokemonsList()
+        interactor?.downloadPokemonsList()
     }
 
     func showInitialPokemonsData(data: Response?) {
-        view.showInitialPokemonData(data: data)
+        view?.showInitialPokemonData(data: data)
     }
         
     func reloadPokemonsData(data: Response?) {
-        view.reloadPokemonsData(data: data)
+        view?.reloadPokemonsData(data: data)
     }
 
     func showAlert(errorValue: String) {
-        view.showAlert(errorValue: errorValue)
+        view?.showAlert(errorValue: errorValue)
     }
     
     func pokemonDetailsTapped(url: String) {
-        
+        router?.openPokemonDetailsViewController(with: url)
     }
     
 }

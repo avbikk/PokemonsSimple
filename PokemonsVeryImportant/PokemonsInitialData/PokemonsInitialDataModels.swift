@@ -1,5 +1,5 @@
 //
-//  InitialPokemonModels.swift
+//  PokemonsInitialDataModels.swift
 //  PokemonsVeryImportant
 //
 //  Created by Alsu Bikkulova on 17/01/2020.

@@ -10,7 +10,7 @@ import Foundation
 
 typealias PokemonsHandler = (Result<Welcome, Error>) -> ()
 
-func downloadPokemonDetails(urlString: String, completion: @escaping PokemonsHandler) {
+func downloadingPokemonDetails(urlString: String, completion: @escaping PokemonsHandler) {
     
     guard let url = URL(string: urlString) else { return }
     
