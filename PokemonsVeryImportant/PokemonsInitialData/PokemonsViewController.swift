@@ -13,7 +13,6 @@ protocol PokemonsInitialDataViewInput: AnyObject {
     func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]?)
     func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]?)
     func showAlert(with message: String)
-    
 }
 
 protocol PokemonsInitialDataViewOutput: AnyObject {
@@ -21,18 +20,16 @@ protocol PokemonsInitialDataViewOutput: AnyObject {
     func viewIsReady()
     func showNextPagePokemonsData()
     func pokemonDetailsTapped(url: String)
-
 }
 
 class PokemonsInitialDataViewController: UIViewController, PokemonsInitialDataViewInput {
     
     var output: PokemonsInitialDataViewOutput?
+
+    private var pokemonsList: [PokemonsList]?
     
-    var pokemonsList: [PokemonsList]?
-    
-    
-    var pokemonsTableView = UITableView()
-    var buttonDescription = UIButton()
+    private var pokemonsTableView = UITableView()
+    private var buttonDescription = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()

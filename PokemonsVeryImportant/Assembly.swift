@@ -12,25 +12,31 @@ class Assembly {
     
     static func configure() -> UIViewController { 
 
+        let service = PokemonsService()
+
         let viewController = PokemonsInitialDataViewController()
-        let presenter = PokemonsPresenter(view: viewController)
+        let interactor = PokemonsInteractor(service: service)
         let router = PokemonsRouter(viewController: viewController)
-        let interactor = PokemonsInteractor(output: presenter)
+
+        let presenter = PokemonsPresenter(view: viewController, interactor: interactor, router: router)
 
         viewController.output = presenter
-        presenter.router = router
-        presenter.interactor = interactor
+        interactor.output = presenter
         
         return viewController
     }
     
     static func createPokemonDetailsScreen(url: String?) -> UIViewController {
+        
+        let service = PokemonsService()
+        
         let viewController = PokemonDetailsViewController()
-        let presenter = PokemonDetailsPresenter(view: viewController, url: url)
-        let interactor = PokemonDetailsInteractor(output: presenter)
-
+        let interactor = PokemonDetailsInteractor(service: service)
+        
+        let presenter = PokemonDetailsPresenter(view: viewController, interactor: interactor, url: url)
+        
         viewController.presenter = presenter
-        presenter.interactor = interactor
+        interactor.output = presenter
 
         return viewController
     }

@@ -11,14 +11,16 @@ import Foundation
 class PokemonsPresenter {
     
     weak var view: PokemonsInitialDataViewInput?
-    var interactor: PokemonsInteractorInput?
-    var router: PokemonsRouterInput?
+    let interactor: PokemonsInteractorInput
+    let router: PokemonsRouterInput
     
     var currentData: PokemonsData?
     var isPokemonsDataDownloaded = true
 
-    init(view: PokemonsInitialDataViewInput) {
+    init(view: PokemonsInitialDataViewInput, interactor: PokemonsInteractorInput, router: PokemonsRouterInput) {
         self.view = view
+        self.interactor = interactor
+        self.router = router
     }
 }
 
@@ -28,19 +30,19 @@ extension PokemonsPresenter: PokemonsInitialDataViewOutput {
         let nextPage = "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
         guard (isPokemonsDataDownloaded == true) else { return }
         isPokemonsDataDownloaded = false
-        interactor?.downloadPokemonsList(url: nextPage)
+        interactor.downloadPokemonsList(url: nextPage)
     }
     
     func showNextPagePokemonsData() {
         if let currentData = currentData {
             guard (isPokemonsDataDownloaded == true) else { return }
             isPokemonsDataDownloaded = false
-            interactor?.downloadPokemonsList(url: currentData.next)
+            interactor.downloadPokemonsList(url: currentData.next)
         }
     }
 
     func pokemonDetailsTapped(url: String) {
-        router?.openPokemonDetailsViewController(with: url)
+        router.openPokemonDetailsViewController(with: url)
     }
 }
 

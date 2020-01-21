@@ -9,7 +9,7 @@
 import Foundation
 
 
-// MARK: - Response
+// MARK: - PokemonsData
 struct PokemonsData: Codable {
     let count: Int
     var next: String
@@ -17,7 +17,7 @@ struct PokemonsData: Codable {
     var results: [PokemonsList]
 }
 
-// MARK: - Pages
+// MARK: - PokemonsList
 struct PokemonsList: Codable {
     let name: String
     let url: String

@@ -26,7 +26,9 @@ struct PokemonDetails: Codable {
         case flavorTextEntries = "flavor_text_entries"
         case generation, id
         case isMainSeries = "is_main_series"
-        case name, names, pokemon
+        case name
+        case names
+        case pokemon
     }
 }
 
@@ -37,7 +39,8 @@ struct EffectEntry: Codable {
     let shortEffect: String
 
     enum CodingKeys: String, CodingKey {
-        case effect, language
+        case effect
+        case language
         case shortEffect = "short_effect"
     }
 }
@@ -51,7 +54,8 @@ struct Generation: Codable {
 // MARK: - FlavorTextEntry
 struct FlavorTextEntry: Codable {
     let flavorText: String
-    let language, versionGroup: Generation
+    let language: Generation
+    let versionGroup: Generation
 
     enum CodingKeys: String, CodingKey {
         case flavorText = "flavor_text"

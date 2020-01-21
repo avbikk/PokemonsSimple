@@ -26,8 +26,8 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
     
     var presenter: PokemonDetailsViewOutput?
     
-    var pokemonsDetailsData: PokemonDetails?
-    var pokemonsDetailsLabel = UILabel()
+    private var pokemonsDetailsData: PokemonDetails?
+    private let pokemonsDetailsLabel = UILabel(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +49,16 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
             pokemonsDetailsData = data
         }
         
-        pokemonsDetailsLabel = UILabel(frame: CGRect(x: 50, y: 100, width: 400, height: 400))
         pokemonsDetailsLabel.tintColor = .black
         pokemonsDetailsLabel.font = UIFont(name: "Arial", size: 25)
         pokemonsDetailsLabel.text = "Id = " + String(data.id) + " \nName = " + data.name + " \nisMainSeries = " + String(data.isMainSeries)
-        pokemonsDetailsLabel.lineBreakMode = NSLineBreakMode.byTruncatingMiddle;
-        pokemonsDetailsLabel.numberOfLines = 10
+        pokemonsDetailsLabel.numberOfLines = 0
         view.addSubview(pokemonsDetailsLabel)
+        pokemonsDetailsLabel.translatesAutoresizingMaskIntoConstraints = false
+        pokemonsDetailsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        pokemonsDetailsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        pokemonsDetailsLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        pokemonsDetailsLabel.heightAnchor.constraint(equalToConstant: 600).isActive = true
+        
     }
 }

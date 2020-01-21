@@ -24,13 +24,16 @@ class PokemonsInteractor: PokemonsInteractorInput {
     
     weak var output: PokemonsInteractorOutput?
     
-    init(output: PokemonsInteractorOutput) {
-        self.output = output
+    let service: PokemonsServiceProtocol
+        
+    init(service: PokemonsServiceProtocol) {
+        self.service = service
     }
     
     func downloadPokemonsList(url: String?) {
         guard let url = url else { return }
-        downloadInitialData(urlString: url) { [weak self] (result) in
+        let service = PokemonsService()
+        service.downloadData(urlString: url) { [weak self] (result: Result<PokemonsData, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let resultJson):

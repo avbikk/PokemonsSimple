@@ -22,14 +22,15 @@ protocol PokemonDetailsInteractorOutput: AnyObject {
 class PokemonDetailsInteractor: PokemonDetailsInteractorInput {
     
     weak var output: PokemonDetailsInteractorOutput?
+    let service: PokemonsServiceProtocol
         
-    init(output: PokemonDetailsInteractorOutput?) {
-        self.output = output
+    init(service: PokemonsServiceProtocol) {
+        self.service = PokemonsService()
     }
     
     func downloadPokemonDetails(urlPokemonDetails: String?) {
         guard let urlPokemonDetails = urlPokemonDetails else { return }
-        downloadingPokemonDetails(urlString: urlPokemonDetails) { [weak self] (result) in
+        service.downloadData(urlString: urlPokemonDetails) { [weak self] (result: Result<PokemonDetails, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let resultJson):

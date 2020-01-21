@@ -11,19 +11,20 @@ import Foundation
 class PokemonDetailsPresenter {
     
     weak var view: PokemonDetailsViewInput?
-    var interactor: PokemonDetailsInteractorInput?
+    let interactor: PokemonDetailsInteractorInput
     
     var urlPokemonDetails: String?
     
-    init(view: PokemonDetailsViewInput, url: String?) {
+    init(view: PokemonDetailsViewInput, interactor: PokemonDetailsInteractorInput, url: String?) {
         self.view = view
+        self.interactor = interactor
         self.urlPokemonDetails = url
     }
 }
 
 extension PokemonDetailsPresenter: PokemonDetailsViewOutput {
     func viewIsReady() {
-        interactor?.downloadPokemonDetails(urlPokemonDetails: urlPokemonDetails)
+        interactor.downloadPokemonDetails(urlPokemonDetails: urlPokemonDetails)
     }
 }
 
@@ -36,5 +37,4 @@ extension PokemonDetailsPresenter: PokemonDetailsInteractorOutput {
     func pokemonsDetailsDownloadFailed(with error: Error) {
         view?.showAlert(with: error.localizedDescription)
     }
-
 }
