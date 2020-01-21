@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias InitialDataHandler = (Result<Response, Error>) -> ()
+typealias InitialDataHandler = (Result<PokemonsData, Error>) -> ()
 
 func downloadInitialData(urlString: String, completion: @escaping InitialDataHandler) {
     
@@ -20,7 +20,7 @@ func downloadInitialData(urlString: String, completion: @escaping InitialDataHan
         /// Decoding
         DispatchQueue.main.async {
             do {
-                let resultJson = try JSONDecoder().decode(Response.self, from: data)
+                let resultJson = try JSONDecoder().decode(PokemonsData.self, from: data)
                 completion(.success(resultJson))
             } catch let error {
                 completion(.failure(error))

@@ -10,14 +10,15 @@ import Foundation
 
 
 // MARK: - Response
-struct Response: Codable {
+struct PokemonsData: Codable {
     let count: Int
-    var next, previous: String
-    var results: [PokemonMainDescription]
+    var next: String
+    let previous: String
+    var results: [PokemonsList]
 }
 
 // MARK: - Pages
-struct PokemonMainDescription: Codable {
+struct PokemonsList: Codable {
     let name: String
     let url: String
 }

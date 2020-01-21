@@ -19,7 +19,7 @@ protocol PokemonDetailsViewProtocol: AnyObject {
 class PokemonDetailsViewController: UIViewController, PokemonDetailsViewProtocol {
     
     let assembly = PokemonDetailsAssembly()
-    var presenter: PokemonDetailsPresenterProtocol! = nil
+    var presenter: PokemonDetailsPresenterProtocol?
     
     var pokemonsDetailsData: Welcome?
     var pokemonsDetailsLabel = UILabel()
@@ -27,7 +27,7 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-        presenter.configureView()
+        presenter?.configureView()
         navigationItem.title = "Информация о покемоне"
     }
     

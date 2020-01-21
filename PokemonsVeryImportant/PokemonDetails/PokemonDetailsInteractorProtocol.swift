@@ -19,7 +19,7 @@ protocol PokemonDetailsInteractorProtocol: AnyObject {
 
 class PokemonDetailsInteractor: PokemonDetailsInteractorProtocol {
     
-    weak var presenter: PokemonDetailsPresenterProtocol!
+    weak var presenter: PokemonDetailsPresenterProtocol?
    
     var urlPokemonDetails: String?
     var pokemonDetails: Welcome?
@@ -41,10 +41,10 @@ class PokemonDetailsInteractor: PokemonDetailsInteractorProtocol {
             switch result {
             case .success(let resultJson):
                 self.pokemonDetails = resultJson
-                self.presenter.showPokemonDetails(data: self.pokemonDetails)
+                self.presenter?.showPokemonDetails(data: self.pokemonDetails)
                 self.isPokemonDetailsDownloaded = true
             case .failure(let error):
-                self.presenter.showAlert(errorValue: error.localizedDescription)
+                self.presenter?.showAlert(errorValue: error.localizedDescription)
             }
         }
     }

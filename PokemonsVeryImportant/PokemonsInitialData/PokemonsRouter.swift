@@ -1,5 +1,5 @@
 //
-//  PokemonsRouterProtocol.swift
+//  PokemonsRouter.swift
 //  PokemonsVeryImportant
 //
 //  Created by Alsu Bikkulova on 19/01/2020.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol PokemonsRouterProtocol: AnyObject {
+protocol PokemonsRouterInput: AnyObject {
     
     func openPokemonDetailsViewController(with url: String?)
 }
 
-class PokemonsRouter: PokemonsRouterProtocol {
+class PokemonsRouter: PokemonsRouterInput {
     
     weak var viewController: UIViewController? 
     
@@ -21,9 +21,8 @@ class PokemonsRouter: PokemonsRouterProtocol {
         self.viewController = viewController
     }
     
-    // MARK: - PokemonsRouterProtocol methods
     func openPokemonDetailsViewController(with url: String?) {
-        let pokemonsDetailsViewController = PokemonDetailsAssembly.configure(url: url)
+        let pokemonsDetailsViewController = Assembly.createPokemonDetailsScreen(url: url)
         viewController?.navigationController?.pushViewController(pokemonsDetailsViewController, animated: true)
     }
     

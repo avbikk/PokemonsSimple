@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            let pokemonsInitialDataViewController = PokemonsAssembly.configure()
+            let pokemonsInitialDataViewController = Assembly.configure()
             let navigationController = UINavigationController(rootViewController: pokemonsInitialDataViewController)
             window.rootViewController = navigationController
             pokemonsInitialDataViewController.view.backgroundColor = .red

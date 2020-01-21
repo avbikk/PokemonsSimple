@@ -18,23 +18,22 @@ protocol PokemonDetailsPresenterProtocol: AnyObject {
 
 class PokemonDetailsPresenter: PokemonDetailsPresenterProtocol {
     
-    weak var view: PokemonDetailsViewProtocol!
-    var interactor: PokemonDetailsInteractorProtocol!
+    weak var view: PokemonDetailsViewProtocol?
+    var interactor: PokemonDetailsInteractorProtocol?
     
     init(view: PokemonDetailsViewProtocol) { 
         self.view = view
     }
     
-    // MARK: - PokemonDetailsPresenterProtocol methods
     func configureView() {
-        interactor.downloadPokemonDetails()
+        interactor?.downloadPokemonDetails()
     }
 
     func showPokemonDetails(data: Welcome?) {
-        view.showPokemonDetails(data: data)
+        view?.showPokemonDetails(data: data)
     }
         
     func showAlert(errorValue: String) {
-        view.showAlert(errorValue: errorValue)
+        view?.showAlert(errorValue: errorValue)
     }
 }
