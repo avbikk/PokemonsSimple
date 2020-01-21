@@ -10,36 +10,40 @@ import Foundation
 import UIKit
 
 
-protocol PokemonDetailsViewProtocol: AnyObject {
+protocol PokemonDetailsViewInput: AnyObject {
 
-    func showPokemonDetails(data: Welcome?)
-    func showAlert(errorValue: String)
+    func showPokemonDetails(data: PokemonDetails?)
+    func showAlert(with message: String)
 }
 
-class PokemonDetailsViewController: UIViewController, PokemonDetailsViewProtocol {
+
+protocol PokemonDetailsViewOutput: AnyObject {
     
-    let assembly = PokemonDetailsAssembly()
-    var presenter: PokemonDetailsPresenterProtocol?
+    func viewIsReady()
+}
+
+class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
     
-    var pokemonsDetailsData: Welcome?
+    var presenter: PokemonDetailsViewOutput?
+    
+    var pokemonsDetailsData: PokemonDetails?
     var pokemonsDetailsLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
-        presenter?.configureView()
         navigationItem.title = "Информация о покемоне"
+        presenter?.viewIsReady()
     }
     
-    // MARK: - PokemonDetailsViewProtocol methods
-    func showAlert(errorValue: String) {
-        let alertController = UIAlertController(title: "Ошибка загрузки", message: errorValue, preferredStyle: .alert)
+    func showAlert(with message: String) {
+        let alertController = UIAlertController(title: "Ошибка загрузки", message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(alertAction)
         present(alertController, animated: true)
     }
     
-    func showPokemonDetails(data: Welcome?) {
+    func showPokemonDetails(data: PokemonDetails?) {
         guard let data = data else { return }
         if (pokemonsDetailsData == nil) {
             pokemonsDetailsData = data

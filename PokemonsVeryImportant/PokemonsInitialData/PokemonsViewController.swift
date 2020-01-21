@@ -26,7 +26,6 @@ protocol PokemonsInitialDataViewOutput: AnyObject {
 
 class PokemonsInitialDataViewController: UIViewController, PokemonsInitialDataViewInput {
     
-    let assembly = Assembly()
     var output: PokemonsInitialDataViewOutput?
     
     var pokemonsList: [PokemonsList]?

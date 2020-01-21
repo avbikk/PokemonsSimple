@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias PokemonsHandler = (Result<Welcome, Error>) -> ()
+typealias PokemonsHandler = (Result<PokemonDetails, Error>) -> ()
 
 func downloadingPokemonDetails(urlString: String, completion: @escaping PokemonsHandler) {
     
@@ -21,7 +21,7 @@ func downloadingPokemonDetails(urlString: String, completion: @escaping Pokemons
         /// Decoding
         DispatchQueue.main.async {
             do {
-                let resultJson = try JSONDecoder().decode(Welcome.self, from: data)
+                let resultJson = try JSONDecoder().decode(PokemonDetails.self, from: data)
                 completion(.success(resultJson))
             } catch let error {
                 completion(.failure(error))

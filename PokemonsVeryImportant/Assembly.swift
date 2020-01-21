@@ -26,8 +26,8 @@ class Assembly {
     
     static func createPokemonDetailsScreen(url: String?) -> UIViewController {
         let viewController = PokemonDetailsViewController()
-        let presenter = PokemonDetailsPresenter(view: viewController)
-        let interactor = PokemonDetailsInteractor(presenter: presenter, url: url)
+        let presenter = PokemonDetailsPresenter(view: viewController, url: url)
+        let interactor = PokemonDetailsInteractor(output: presenter)
 
         viewController.presenter = presenter
         presenter.interactor = interactor

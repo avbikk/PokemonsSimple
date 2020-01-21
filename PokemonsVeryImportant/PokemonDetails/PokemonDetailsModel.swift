@@ -1,5 +1,5 @@
 //
-//  PokemonModel.swift
+//  PokemonDetailsModel.swift
 //  PokemonsVeryImportant
 //
 //  Created by Alsu Bikkulova on 17/01/2020.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-// MARK: - Welcome
-struct Welcome: Codable {
+// MARK: - PokemonDetails
+struct PokemonDetails: Codable {
     let effectChanges: [JSONAny]
     let effectEntries: [EffectEntry]
     let flavorTextEntries: [FlavorTextEntry]
