@@ -27,7 +27,7 @@ class PokemonsViewControllerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testOutputViewIsReadyWasCalled() {
+    func testOutputViewIsReadyWasCalledAfterViewDidLoad() {
         // act
         viewController.viewDidLoad()
         // assert

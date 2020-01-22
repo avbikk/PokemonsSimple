@@ -9,7 +9,7 @@
 import Foundation
 @testable import PokemonsVeryImportant
 
-class PokemonsInitialDataViewOutputMock: PokemonsInitialDataViewOutput {
+class PokemonsInitialDataViewOutputMock: PokemonsInitialDataViewOutput {    
     
     var viewIsReadyCount = 0
     var showNextPagePokemonsDataCount = 0
@@ -19,11 +19,11 @@ class PokemonsInitialDataViewOutputMock: PokemonsInitialDataViewOutput {
         viewIsReadyCount += 1
     }
     
-    func showNextPagePokemonsData() {
+    func didShowLastItem() {
         showNextPagePokemonsDataCount += 1
     }
     
-    func pokemonDetailsTapped(url: String) {
+    func pokemonDetailsTapped(with urlString: String) {
         pokemonDetailsTapped += 1
     }
     

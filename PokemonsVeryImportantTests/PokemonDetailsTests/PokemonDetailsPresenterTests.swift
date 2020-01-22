@@ -16,6 +16,7 @@ class PokemonDetailsPresenterTests: XCTestCase {
     var interactor: PokemonDetailsInteractorInputMock!
 
     override func setUp() {
+        super.setUp()
         view = PokemonDetailsViewInputMock()
         interactor = PokemonDetailsInteractorInputMock()
         presenter = PokemonDetailsPresenter(view: view,
@@ -27,31 +28,32 @@ class PokemonDetailsPresenterTests: XCTestCase {
         view = nil
         interactor = nil
         presenter = nil
-    }
+        super.tearDown()
+}
 
     func testDownloadPokemonDetailsWasCalledAfterViewIsReady() {
         // act
         presenter.viewIsReady()
         // assert
-        XCTAssert(interactor.downloadPokemonDetailsCount == 1, "DownloadPokemonDetails was called after viewIsReady")
+        XCTAssert(interactor.downloadPokemonDetailsCount == 1, "DownloadPokemonDetails was not called after viewIsReady")
     }
     
-    func testDownloadPokemonDetailsWasCalledAfterPokemonsDetailsDownloaded() {
+    func testShowPokemonDetailsWasCalledAfterPokemonsDetailsDownloaded() {
         // arrange
         let data: PokemonDetails? = PokemonDetails(effectChanges: [], effectEntries: [], flavorTextEntries: [], generation: Generation(name: "", url: ""), id: 1, isMainSeries: false, name: "", names: [], pokemon: [])
         // act
         presenter.pokemonsDetailsDownloaded(data: data)
         // assert
-        XCTAssert(view.showPokemonDetailsCount == 1, "ShowPokemonDetails was called after pokemonsDetailsDownloaded")
+        XCTAssert(view.showPokemonDetailsCount == 1, "ShowPokemonDetails was not called after pokemonsDetailsDownloaded")
     }
     
-    func testDownloadPokemonDetailsWasCalledAfterPokemonsDetailsDownloadFailed() {
+    func testShowAlertWasCalledAfterPokemonsDetailsDownloadFailed() {
         // arrange
         let errorMock = NSError(domain: "", code: 401, userInfo: [NSLocalizedDescriptionKey: "Invalid access token"])
         // act
         presenter.pokemonsDetailsDownloadFailed(with: errorMock)
         // assert
-        XCTAssert(view.showAlertCount == 1, "ShowPokemonDetails was called after pokemonsDetailsDownloadFailed")
+        XCTAssert(view.showAlertCount == 1, "ShowPokemonDetails was not called after pokemonsDetailsDownloadFailed")
     }
 
 }

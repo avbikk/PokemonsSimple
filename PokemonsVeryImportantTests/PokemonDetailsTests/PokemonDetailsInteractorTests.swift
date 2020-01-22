@@ -16,6 +16,7 @@ class PokemonDetailsInteractorTests: XCTestCase {
     var service: PokemonsServiceProtocolMock!
     
     override func setUp() {
+        super.setUp()
         service = PokemonsServiceProtocolMock()
         interactor = PokemonDetailsInteractor(service: service)
     }
@@ -23,14 +24,15 @@ class PokemonDetailsInteractorTests: XCTestCase {
     override func tearDown() {
         interactor = nil
         service = nil
-    }
+        super.tearDown()
+}
 
     func testDownloadPokemonsListWasCalled() {
         // act
         interactor.downloadPokemonDetails(urlPokemonDetails: "Url")
 
         // assert
-        XCTAssert(service.downloadDataCount == 1, "DownloadPokemonsList method was called for interactor")
+        XCTAssert(service.downloadDataCount == 1, "DownloadPokemonsList method was not  called for interactor")
     }
     
     func testDownloadPokemonsListWithEmptyUrlWasCalled() {

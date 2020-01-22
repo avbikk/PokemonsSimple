@@ -13,7 +13,7 @@ class PokemonsRouterInputMock: PokemonsRouterInput {
     
     var openPokemonDetailsViewControllerCount = 0
     
-    func openPokemonDetailsViewController(with url: String?) {
+    func openPokemonDetailsViewController(with urlString: String?) {
         openPokemonDetailsViewControllerCount += 1
     }
 }

@@ -18,8 +18,8 @@ protocol PokemonsInitialDataViewInput: UIViewController {
 protocol PokemonsInitialDataViewOutput: AnyObject {
 
     func viewIsReady()
-    func showNextPagePokemonsData()
-    func pokemonDetailsTapped(url: String)
+    func didShowLastItem()
+    func pokemonDetailsTapped(with urlString: String)
 }
 
 class PokemonsInitialDataViewController: UIViewController, PokemonsInitialDataViewInput {
@@ -79,12 +79,12 @@ extension PokemonsInitialDataViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let pokemonsList = pokemonsList else { return }
         guard indexPath.row == pokemonsList.count-1 else { return }
-        output?.showNextPagePokemonsData()
+        output?.didShowLastItem()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let pokemons = pokemonsList {
-            output?.pokemonDetailsTapped(url: pokemons[indexPath.row].url)
+            output?.pokemonDetailsTapped(with: pokemons[indexPath.row].url)
         }
     }
 }

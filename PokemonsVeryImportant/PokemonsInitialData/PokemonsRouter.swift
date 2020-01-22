@@ -10,7 +10,7 @@ import UIKit
 
 protocol PokemonsRouterInput: AnyObject {
     
-    func openPokemonDetailsViewController(with url: String?)
+    func openPokemonDetailsViewController(with urlString: String?)
 }
 
 class PokemonsRouter: PokemonsRouterInput {
@@ -21,8 +21,8 @@ class PokemonsRouter: PokemonsRouterInput {
         self.viewController = viewController
     }
     
-    func openPokemonDetailsViewController(with url: String?) {
-        let pokemonsDetailsViewController = Assembly.createPokemonDetailsScreen(url: url)
+    func openPokemonDetailsViewController(with urlString: String?) {
+        let pokemonsDetailsViewController = Assembly.createPokemonDetailsScreen(url: urlString)
         viewController?.navigationController?.pushViewController(pokemonsDetailsViewController, animated: true)
     }
     

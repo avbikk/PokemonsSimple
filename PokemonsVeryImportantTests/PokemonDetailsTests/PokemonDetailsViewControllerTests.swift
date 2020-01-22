@@ -15,6 +15,7 @@ class PokemonDetailsViewControllerTests: XCTestCase {
     var output: PokemonDetailsViewOutputMock!
         
     override func setUp() {
+        super.setUp()
         viewController = PokemonDetailsViewController()
         output = PokemonDetailsViewOutputMock()
         viewController.output = output
@@ -22,6 +23,7 @@ class PokemonDetailsViewControllerTests: XCTestCase {
 
     override func tearDown() {
         viewController = nil
+        super.tearDown()
     }
 
     func testOutputViewIsReadyWasCalled() {
