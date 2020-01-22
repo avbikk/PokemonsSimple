@@ -25,7 +25,7 @@ class PokemonDetailsInteractor: PokemonDetailsInteractorInput {
     let service: PokemonsServiceProtocol
         
     init(service: PokemonsServiceProtocol) {
-        self.service = PokemonsService()
+        self.service = service
     }
     
     func downloadPokemonDetails(urlPokemonDetails: String?) {

@@ -12,9 +12,9 @@ import Foundation
 // MARK: - PokemonsData
 struct PokemonsData: Codable {
     let count: Int
-    var next: String
+    let next: String
     let previous: String
-    var results: [PokemonsList]
+    let results: [PokemonsList]
 }
 
 // MARK: - PokemonsList

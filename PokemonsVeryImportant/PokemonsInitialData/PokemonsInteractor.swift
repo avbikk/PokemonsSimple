@@ -32,7 +32,6 @@ class PokemonsInteractor: PokemonsInteractorInput {
     
     func downloadPokemonsList(url: String?) {
         guard let url = url else { return }
-        let service = PokemonsService()
         service.downloadData(urlString: url) { [weak self] (result: Result<PokemonsData, Error>) in
             guard let self = self else { return }
             switch result {

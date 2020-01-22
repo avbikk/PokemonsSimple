@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PokemonsInitialDataViewInput: AnyObject {
+protocol PokemonsInitialDataViewInput: UIViewController {
 
     func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]?)
     func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]?)
@@ -35,15 +35,16 @@ class PokemonsInitialDataViewController: UIViewController, PokemonsInitialDataVi
         super.viewDidLoad()
         view.backgroundColor = .red
         navigationItem.title = "Список покемонов"
+        pokemonsTableView = UITableView(frame: view.frame)
+        pokemonsTableView.delegate = self
+        pokemonsTableView.dataSource = self
+        view.addSubview(pokemonsTableView)
         output?.viewIsReady()
     }
     
     func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]?) {
         pokemonsList = pokemonsDownloadedList
-        pokemonsTableView = UITableView(frame: view.frame)
-        pokemonsTableView.delegate = self
-        pokemonsTableView.dataSource = self
-        view.addSubview(pokemonsTableView)
+        pokemonsTableView.reloadData()
     }
     
     func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]?) {

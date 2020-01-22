@@ -15,9 +15,9 @@ protocol PokemonsRouterInput: AnyObject {
 
 class PokemonsRouter: PokemonsRouterInput {
     
-    weak var viewController: UIViewController? 
+    weak var viewController: UIViewController?
     
-    init(viewController: PokemonsInitialDataViewController) {
+    init(viewController: UIViewController) {
         self.viewController = viewController
     }
     

@@ -35,7 +35,7 @@ class Assembly {
         
         let presenter = PokemonDetailsPresenter(view: viewController, interactor: interactor, url: url)
         
-        viewController.presenter = presenter
+        viewController.output = presenter
         interactor.output = presenter
 
         return viewController

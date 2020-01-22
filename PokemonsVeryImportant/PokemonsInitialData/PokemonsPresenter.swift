@@ -15,7 +15,8 @@ class PokemonsPresenter {
     let router: PokemonsRouterInput
     
     var currentData: PokemonsData?
-    var isPokemonsDataDownloaded = true
+    private var isPokemonsDataDownloaded = true
+    private var nextPage = "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
 
     init(view: PokemonsInitialDataViewInput, interactor: PokemonsInteractorInput, router: PokemonsRouterInput) {
         self.view = view
@@ -27,7 +28,6 @@ class PokemonsPresenter {
 extension PokemonsPresenter: PokemonsInitialDataViewOutput {
 
     func viewIsReady() {
-        let nextPage = "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
         guard (isPokemonsDataDownloaded == true) else { return }
         isPokemonsDataDownloaded = false
         interactor.downloadPokemonsList(url: nextPage)
@@ -53,7 +53,7 @@ extension PokemonsPresenter: PokemonsInteractorOutput {
         guard let data = data else { return }
         let pokemonsDownloadedList = data.results
         if currentData != nil {
-            currentData?.next = data.next
+            nextPage = data.next
             view?.reloadPokemonsData(pokemonsDownloadedList: pokemonsDownloadedList)
         } else {
             currentData = data

@@ -24,7 +24,7 @@ protocol PokemonDetailsViewOutput: AnyObject {
 
 class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
     
-    var presenter: PokemonDetailsViewOutput?
+    var output: PokemonDetailsViewOutput?
     
     private var pokemonsDetailsData: PokemonDetails?
     private let pokemonsDetailsLabel = UILabel(frame: .zero)
@@ -33,7 +33,7 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
         super.viewDidLoad()
         view.backgroundColor = .red
         navigationItem.title = "Информация о покемоне"
-        presenter?.viewIsReady()
+        output?.viewIsReady()
     }
     
     func showAlert(with message: String) {
