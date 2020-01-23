@@ -24,10 +24,10 @@ class PokemonsService: PokemonsServiceProtocol {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
-                let error = NSError(domain: "BadUrl", code: 0, userInfo: [NSLocalizedDescriptionKey: "Некорректная ссылка"])
+                let error = NSError(domain: "BadUrl", code: 0, userInfo: [NSLocalizedDescriptionKey: "Пришли пустые данные"])
                 completion(.failure(error))
-                
-                return }
+                return
+            }
             do {
                 let resultJson = try JSONDecoder().decode(DataType.self, from: data)
                 DispatchQueue.main.async {
