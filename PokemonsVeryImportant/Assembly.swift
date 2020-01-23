@@ -12,7 +12,7 @@ class Assembly {
     
     static func configure() -> UIViewController { 
 
-        let session = URLSession(configuration: .ephemeral)
+        let session = URLSession(configuration: .default)
         let service = PokemonsService(session: session)
 
         let viewController = PokemonsInitialDataViewController()

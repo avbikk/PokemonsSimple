@@ -15,7 +15,7 @@ protocol PokemonsServiceProtocol {
 
 class PokemonsService: PokemonsServiceProtocol {
     
-    var session: URLSession
+    let session: URLSession
     
     init(session: URLSession) {
         self.session = session

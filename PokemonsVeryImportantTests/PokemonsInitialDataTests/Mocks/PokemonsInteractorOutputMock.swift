@@ -14,7 +14,7 @@ class PokemonsInteractorOutputMock: PokemonsInteractorOutput {
     var pokemonsDataDownloadedCount = 0
     var pokemonsDataDownloadFailedCount = 0
     
-    func pokemonsDataDownloaded(data: PokemonsData?) {
+    func pokemonsDataDownloaded(data: PokemonsData) {
         pokemonsDataDownloadedCount += 1
     }
     

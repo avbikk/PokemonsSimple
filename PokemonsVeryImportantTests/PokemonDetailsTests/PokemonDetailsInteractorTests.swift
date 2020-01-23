@@ -37,7 +37,7 @@ class PokemonDetailsInteractorTests: XCTestCase {
     
     func testDownloadPokemonsListWithEmptyUrlWasCalled() {
         // act
-        interactor.downloadPokemonDetails(urlPokemonDetails: nil)
+        interactor.downloadPokemonDetails(urlPokemonDetails: "url")
 
         // assert
         XCTAssert(service.downloadDataCount == 0, "DownloadPokemonsList method was called for interactor with empty url")

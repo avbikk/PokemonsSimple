@@ -15,11 +15,11 @@ class PokemonsInitialDataViewInputMock: UIViewController, PokemonsInitialDataVie
     var reloadPokemonsDataCount = 0
     var showAlertCount = 0
             
-    func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]?) {
+    func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]) {
         showInitialPokemonDataCount += 1
     }
     
-    func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]?) {
+    func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]) {
         reloadPokemonsDataCount += 1
     }
     

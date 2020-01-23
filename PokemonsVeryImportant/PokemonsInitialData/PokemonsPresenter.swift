@@ -59,7 +59,7 @@ extension PokemonsPresenter: PokemonsInteractorOutput {
     }
     
     func pokemonsDataDownloadFailed(with error: Error) {
-        view?.showAlert(with: error.localizedDescription)
+        view?.showAlert(with: "error.localizedDescription")
     }
 }
 

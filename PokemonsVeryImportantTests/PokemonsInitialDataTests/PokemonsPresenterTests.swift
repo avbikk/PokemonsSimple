@@ -51,7 +51,7 @@ class PokemonsPresenterTests: XCTestCase {
     
     func testDownloadPokemonsListCountWasCalledAfterDidShowLastItem() {
         // arrange
-        let data: PokemonsData? = PokemonsData(count: 1, next: "", previous: "", results: [])
+        let data: PokemonsData = PokemonsData(count: 1, next: "", previous: "", results: [])
         presenter.pokemonsDataDownloaded(data: data)
         // act
         presenter.didShowLastItem()
@@ -68,7 +68,7 @@ class PokemonsPresenterTests: XCTestCase {
     
     func testShowInitialPokemonDataCountWasCalledAfterPokemonsDataDownloadedWasCalled() {
         // arrange
-        let data: PokemonsData? = PokemonsData(count: 1, next: "", previous: "", results: [])
+        let data: PokemonsData = PokemonsData(count: 1, next: "", previous: "", results: [])
         // act
         presenter.pokemonsDataDownloaded(data: data)
         // assert
@@ -78,7 +78,7 @@ class PokemonsPresenterTests: XCTestCase {
     
     func testReloadPokemonsDataWasCalledAfterPokemonsDataDownloaded() {
         // arrange
-        let data: PokemonsData? = PokemonsData(count: 1, next: "", previous: "", results: [])
+        let data: PokemonsData = PokemonsData(count: 1, next: "", previous: "", results: [])
         presenter.pokemonsDataDownloaded(data: data)
         // act
         presenter.pokemonsDataDownloaded(data: data)

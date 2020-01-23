@@ -14,7 +14,7 @@ class PokemonDetailsViewInputMock: PokemonDetailsViewInput {
     var showPokemonDetailsCount = 0
     var showAlertCount = 0
     
-    func showPokemonDetails(data: PokemonDetails?) {
+    func showPokemonDetails(data: PokemonDetails) {
         showPokemonDetailsCount += 1
     }
     

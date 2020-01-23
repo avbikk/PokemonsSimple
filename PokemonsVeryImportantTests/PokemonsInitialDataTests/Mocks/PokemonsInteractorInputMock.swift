@@ -13,7 +13,7 @@ class PokemonsInteractorInputMock: PokemonsInteractorInput {
     
     var downloadPokemonsListCount = 0
     
-    func downloadPokemonsList(url: String?) {
+    func downloadPokemonsList(url: String) {
         downloadPokemonsListCount += 1
     }
 }

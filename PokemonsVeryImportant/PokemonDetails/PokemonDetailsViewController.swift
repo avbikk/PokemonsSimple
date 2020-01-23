@@ -26,13 +26,23 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
     
     var output: PokemonDetailsViewOutput?
     
-    private var pokemonsDetailsData: PokemonDetails?
+    private var pokemonsDetailsData: PokemonDetails!
     private let pokemonsDetailsLabel = UILabel(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Информация о покемоне"
+        pokemonsDetailsLabel.tintColor = .black
+        pokemonsDetailsLabel.font = UIFont(name: "Arial", size: 25)
+        pokemonsDetailsLabel.numberOfLines = 0
+        view.addSubview(pokemonsDetailsLabel)
+        pokemonsDetailsLabel.translatesAutoresizingMaskIntoConstraints = false
+        pokemonsDetailsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        pokemonsDetailsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        pokemonsDetailsLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        pokemonsDetailsLabel.heightAnchor.constraint(equalToConstant: 600).isActive = true
+
         output?.viewIsReady()
     }
     
@@ -47,17 +57,6 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
         if (pokemonsDetailsData == nil) {
             pokemonsDetailsData = data
         }
-        
-        pokemonsDetailsLabel.tintColor = .black
-        pokemonsDetailsLabel.font = UIFont(name: "Arial", size: 25)
         pokemonsDetailsLabel.text = "Id = " + String(data.id) + " \nName = " + data.name + " \nisMainSeries = " + String(data.isMainSeries)
-        pokemonsDetailsLabel.numberOfLines = 0
-        view.addSubview(pokemonsDetailsLabel)
-        pokemonsDetailsLabel.translatesAutoresizingMaskIntoConstraints = false
-        pokemonsDetailsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        pokemonsDetailsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pokemonsDetailsLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        pokemonsDetailsLabel.heightAnchor.constraint(equalToConstant: 600).isActive = true
-        
     }
 }

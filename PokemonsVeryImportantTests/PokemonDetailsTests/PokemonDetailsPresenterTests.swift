@@ -21,7 +21,7 @@ class PokemonDetailsPresenterTests: XCTestCase {
         interactor = PokemonDetailsInteractorInputMock()
         presenter = PokemonDetailsPresenter(view: view,
                                             interactor: interactor,
-                                            url: nil)
+                                            url: "url")
     }
 
     override func tearDown() {
@@ -40,7 +40,7 @@ class PokemonDetailsPresenterTests: XCTestCase {
     
     func testShowPokemonDetailsWasCalledAfterPokemonsDetailsDownloaded() {
         // arrange
-        let data: PokemonDetails? = PokemonDetails(effectChanges: [], effectEntries: [], flavorTextEntries: [], generation: Generation(name: "", url: ""), id: 1, isMainSeries: false, name: "", names: [], pokemon: [])
+        let data: PokemonDetails = PokemonDetails(effectChanges: [], effectEntries: [], flavorTextEntries: [], generation: Generation(name: "", url: ""), id: 1, isMainSeries: false, name: "", names: [], pokemon: [])
         // act
         presenter.pokemonsDetailsDownloaded(data: data)
         // assert
