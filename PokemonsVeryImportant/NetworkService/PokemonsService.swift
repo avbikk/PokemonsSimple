@@ -9,6 +9,7 @@
 import Foundation
 
 protocol PokemonsServiceProtocol {
+    
     func downloadData<T: Decodable>(urlString: String, completion: @escaping (Result<T, Error>) -> Void)
 }
 
@@ -24,7 +25,7 @@ class PokemonsService: PokemonsServiceProtocol {
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
-                let error = NSError(domain: "BadUrl", code: 0, userInfo: [NSLocalizedDescriptionKey: "Пришли пустые данные"])
+                let error = NSError(domain: "Empty data", code: 1, userInfo: [NSLocalizedDescriptionKey: "Пришли пустые данные"])
                 completion(.failure(error))
                 return
             }
