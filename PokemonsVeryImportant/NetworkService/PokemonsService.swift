@@ -15,6 +15,12 @@ protocol PokemonsServiceProtocol {
 
 class PokemonsService: PokemonsServiceProtocol {
 
+    var session: URLSession
+    
+    init(session: URLSession) {
+        self.session = session
+    }
+    
     func downloadData<DataType: Decodable>(urlString: String, completion: @escaping (Result<DataType, Error>) -> Void) {
         
         guard let url = URL(string: urlString) else {

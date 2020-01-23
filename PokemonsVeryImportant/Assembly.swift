@@ -12,7 +12,10 @@ class Assembly {
     
     static func configure() -> UIViewController { 
 
-        let service = PokemonsService()
+        let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
+        let urlString = "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
+
+        let service = PokemonsService(session: session)
 
         let viewController = PokemonsInitialDataViewController()
         let interactor = PokemonsInteractor(service: service)
@@ -28,7 +31,8 @@ class Assembly {
     
     static func createPokemonDetailsScreen(url: String) -> UIViewController {
         
-        let service = PokemonsService()
+        let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
+        let service = PokemonsService(session: session)
         
         let viewController = PokemonDetailsViewController()
         let interactor = PokemonDetailsInteractor(service: service)
