@@ -14,7 +14,7 @@ protocol PokemonsServiceProtocol {
 }
 
 class PokemonsService: PokemonsServiceProtocol {
-
+    
     var session: URLSession
     
     init(session: URLSession) {
@@ -29,7 +29,7 @@ class PokemonsService: PokemonsServiceProtocol {
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        session.dataTask(with: url, completionHandler: { data, response, error in
             guard let data = data else {
                 let error = NSError(domain: "Empty data", code: 1, userInfo: [NSLocalizedDescriptionKey: "Пришли пустые данные"])
                 completion(.failure(error))
@@ -44,7 +44,8 @@ class PokemonsService: PokemonsServiceProtocol {
                 DispatchQueue.main.async {
                     completion(.failure(error))
                 }
+                
             }
-        }.resume()
+        }).resume()
     }
 }

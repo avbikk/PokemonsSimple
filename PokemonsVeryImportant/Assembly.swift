@@ -13,8 +13,6 @@ class Assembly {
     static func configure() -> UIViewController { 
 
         let session = URLSession(configuration: URLSessionConfiguration.ephemeral)
-        let urlString = "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
-
         let service = PokemonsService(session: session)
 
         let viewController = PokemonsInitialDataViewController()
