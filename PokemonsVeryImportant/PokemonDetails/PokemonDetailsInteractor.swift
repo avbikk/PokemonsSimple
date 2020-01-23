@@ -10,12 +10,12 @@ import Foundation
 
 protocol PokemonDetailsInteractorInput: AnyObject {
     
-    func downloadPokemonDetails(urlPokemonDetails: String?)
+    func downloadPokemonDetails(urlPokemonDetails: String)
 }
 
 protocol PokemonDetailsInteractorOutput: AnyObject {
     
-    func pokemonsDetailsDownloaded(data: PokemonDetails?)
+    func pokemonsDetailsDownloaded(data: PokemonDetails)
     func pokemonsDetailsDownloadFailed(with error: Error)
 }
 
@@ -28,15 +28,13 @@ class PokemonDetailsInteractor: PokemonDetailsInteractorInput {
         self.service = service
     }
     
-    func downloadPokemonDetails(urlPokemonDetails: String?) {
-        guard let urlPokemonDetails = urlPokemonDetails else { return }
+    func downloadPokemonDetails(urlPokemonDetails: String) {
         service.downloadData(urlString: urlPokemonDetails) { [weak self] (result: Result<PokemonDetails, Error>) in
-            guard let self = self else { return }
             switch result {
             case .success(let resultJson):
-                self.output?.pokemonsDetailsDownloaded(data: resultJson)
+                self?.output?.pokemonsDetailsDownloaded(data: resultJson)
             case .failure(let error):
-                self.output?.pokemonsDetailsDownloadFailed(with: error)
+                self?.output?.pokemonsDetailsDownloadFailed(with: error)
             }
         }
     }

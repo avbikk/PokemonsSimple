@@ -14,7 +14,7 @@ class PokemonsPresenter {
     let interactor: PokemonsInteractorInput
     let router: PokemonsRouterInput
     
-    private var currentData: PokemonsData?
+    private var currentData: PokemonsData!
     private var isPokemonsDataDownloading = false
     private var nextPage = "https://pokeapi.co/api/v2/ability/?limit=20&offset=20"
 
@@ -47,16 +47,14 @@ extension PokemonsPresenter: PokemonsInitialDataViewOutput {
 
 extension PokemonsPresenter: PokemonsInteractorOutput {
     
-    func pokemonsDataDownloaded(data: PokemonsData?) {
+    func pokemonsDataDownloaded(data: PokemonsData) {
         isPokemonsDataDownloading = false
-        guard let data = data else { return }
-        let pokemonsDownloadedList = data.results
         if currentData != nil {
             nextPage = data.next
-            view?.reloadPokemonsData(pokemonsDownloadedList: pokemonsDownloadedList)
+            view?.reloadPokemonsData(pokemonsDownloadedList: data.results)
         } else {
             currentData = data
-            view?.showInitialPokemonData(pokemonsDownloadedList: pokemonsDownloadedList)
+            view?.showInitialPokemonData(pokemonsDownloadedList: data.results)
         }
     }
     

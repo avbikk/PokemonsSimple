@@ -10,8 +10,8 @@ import UIKit
 
 protocol PokemonsInitialDataViewInput: UIViewController {
 
-    func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]?)
-    func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]?)
+    func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList])
+    func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList])
     func showAlert(with message: String)
 }
 
@@ -26,11 +26,11 @@ class PokemonsInitialDataViewController: UIViewController, PokemonsInitialDataVi
     
     var output: PokemonsInitialDataViewOutput?
 
-    private var pokemonsList: [PokemonsList]?
+    private var pokemonsList: [PokemonsList] = []
     
     private var pokemonsTableView = UITableView()
     private var buttonDescription = UIButton()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
@@ -38,18 +38,18 @@ class PokemonsInitialDataViewController: UIViewController, PokemonsInitialDataVi
         pokemonsTableView = UITableView(frame: view.frame)
         pokemonsTableView.delegate = self
         pokemonsTableView.dataSource = self
+        pokemonsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(pokemonsTableView)
         output?.viewIsReady()
     }
     
-    func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]?) {
+    func showInitialPokemonData(pokemonsDownloadedList: [PokemonsList]) {
         pokemonsList = pokemonsDownloadedList
         pokemonsTableView.reloadData()
     }
     
-    func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]?) {
-        guard let pokemonsDownloadedList = pokemonsDownloadedList else { return }
-        pokemonsList?.append(contentsOf: pokemonsDownloadedList)
+    func reloadPokemonsData(pokemonsDownloadedList: [PokemonsList]) {
+        pokemonsList.append(contentsOf: pokemonsDownloadedList)
         pokemonsTableView.reloadData()
     }
 
@@ -64,28 +64,23 @@ class PokemonsInitialDataViewController: UIViewController, PokemonsInitialDataVi
 
 extension PokemonsInitialDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let pokemons = pokemonsList else { return 20 }
-        return pokemons.count
+        return pokemonsList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        if let pokemons = pokemonsList {
-            cell.textLabel?.text = String(indexPath.row) + " " + pokemons[indexPath.row].name
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = String(indexPath.row) + " " + pokemonsList[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let pokemonsList = pokemonsList else { return }
         guard indexPath.row == pokemonsList.count-1 else { return }
         output?.didShowLastItem()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let pokemons = pokemonsList {
-            output?.pokemonDetailsTapped(with: pokemons[indexPath.row].url)
-        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        output?.pokemonDetailsTapped(with: pokemonsList[indexPath.row].url)
     }
 }
 

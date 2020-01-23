@@ -26,7 +26,7 @@ class Assembly {
         return viewController
     }
     
-    static func createPokemonDetailsScreen(url: String?) -> UIViewController {
+    static func createPokemonDetailsScreen(url: String) -> UIViewController {
         
         let service = PokemonsService()
         

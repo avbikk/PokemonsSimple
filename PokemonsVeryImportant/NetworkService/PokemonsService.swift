@@ -16,20 +16,28 @@ class PokemonsService: PokemonsServiceProtocol {
 
     func downloadData<DataType: Decodable>(urlString: String, completion: @escaping (Result<DataType, Error>) -> Void) {
         
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: urlString) else {
+            let error = NSError(domain: "BadUrl", code: 0, userInfo: [NSLocalizedDescriptionKey: "Некорректная ссылка"])
+            completion(.failure(error))
+            return
+        }
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data else { return }
-            guard String(data: data, encoding: .utf8) != nil else { return }
-            DispatchQueue.main.async {
-                do {
-                    let resultJson = try JSONDecoder().decode(DataType.self, from: data)
+            guard let data = data else {
+                let error = NSError(domain: "BadUrl", code: 0, userInfo: [NSLocalizedDescriptionKey: "Некорректная ссылка"])
+                completion(.failure(error))
+                
+                return }
+            do {
+                let resultJson = try JSONDecoder().decode(DataType.self, from: data)
+                DispatchQueue.main.async {
                     completion(.success(resultJson))
-                } catch let error {
+                }
+            } catch let error {
+                DispatchQueue.main.async {
                     completion(.failure(error))
                 }
             }
         }.resume()
     }
 }
-
-

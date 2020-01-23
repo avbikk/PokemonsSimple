@@ -12,7 +12,7 @@ import UIKit
 
 protocol PokemonDetailsViewInput: AnyObject {
 
-    func showPokemonDetails(data: PokemonDetails?)
+    func showPokemonDetails(data: PokemonDetails)
     func showAlert(with message: String)
 }
 
@@ -31,7 +31,7 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         navigationItem.title = "Информация о покемоне"
         output?.viewIsReady()
     }
@@ -43,8 +43,7 @@ class PokemonDetailsViewController: UIViewController, PokemonDetailsViewInput {
         present(alertController, animated: true)
     }
     
-    func showPokemonDetails(data: PokemonDetails?) {
-        guard let data = data else { return }
+    func showPokemonDetails(data: PokemonDetails) {
         if (pokemonsDetailsData == nil) {
             pokemonsDetailsData = data
         }

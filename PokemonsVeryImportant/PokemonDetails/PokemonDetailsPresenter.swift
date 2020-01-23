@@ -13,9 +13,9 @@ class PokemonDetailsPresenter {
     weak var view: PokemonDetailsViewInput?
     let interactor: PokemonDetailsInteractorInput
     
-    var urlPokemonDetails: String?
+    var urlPokemonDetails: String
     
-    init(view: PokemonDetailsViewInput, interactor: PokemonDetailsInteractorInput, url: String?) {
+    init(view: PokemonDetailsViewInput, interactor: PokemonDetailsInteractorInput, url: String) {
         self.view = view
         self.interactor = interactor
         self.urlPokemonDetails = url
@@ -30,7 +30,7 @@ extension PokemonDetailsPresenter: PokemonDetailsViewOutput {
 
 extension PokemonDetailsPresenter: PokemonDetailsInteractorOutput {
 
-    func pokemonsDetailsDownloaded(data: PokemonDetails?) {
+    func pokemonsDetailsDownloaded(data: PokemonDetails) {
         view?.showPokemonDetails(data: data)
     }
 
