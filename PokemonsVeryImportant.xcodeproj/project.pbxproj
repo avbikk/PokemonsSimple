@@ -29,7 +29,6 @@
 		11A2253923D5E8860082E901 /* PokemonDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A2253823D5E8860082E901 /* PokemonDetailsInteractor.swift */; };
 		11ABF78D23D754680018FDB6 /* PokemonsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11ABF78C23D754680018FDB6 /* PokemonsPresenterTests.swift */; };
 		11B2A86A23D2079000243255 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2A86923D2079000243255 /* AppDelegate.swift */; };
-		11B2A86C23D2079000243255 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2A86B23D2079000243255 /* SceneDelegate.swift */; };
 		11B2A86E23D2079000243255 /* PokemonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2A86D23D2079000243255 /* PokemonsViewController.swift */; };
 		11B2A87323D2079200243255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B2A87223D2079200243255 /* Assets.xcassets */; };
 		11B2A88123D2079300243255 /* PokemonsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2A88023D2079300243255 /* PokemonsInteractorTests.swift */; };
@@ -72,7 +71,6 @@
 		11ABF78C23D754680018FDB6 /* PokemonsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsPresenterTests.swift; sourceTree = "<group>"; };
 		11B2A86623D2079000243255 /* PokemonsVeryImportant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokemonsVeryImportant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11B2A86923D2079000243255 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		11B2A86B23D2079000243255 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		11B2A86D23D2079000243255 /* PokemonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsViewController.swift; sourceTree = "<group>"; };
 		11B2A87223D2079200243255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11B2A87723D2079200243255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 		11B2A86823D2079000243255 /* PokemonsVeryImportant */ = {
 			isa = PBXGroup;
 			children = (
-				11B2A86B23D2079000243255 /* SceneDelegate.swift */,
 				11B2A86923D2079000243255 /* AppDelegate.swift */,
 				11A2252B23D455DC0082E901 /* Assembly.swift */,
 				11A2253323D485090082E901 /* PokemonsInitialData */,
@@ -328,7 +325,6 @@
 				11B2A86A23D2079000243255 /* AppDelegate.swift in Sources */,
 				11B2A8A123D224B500243255 /* PokemonDetailsModel.swift in Sources */,
 				11A2253223D45A880082E901 /* PokemonsInteractor.swift in Sources */,
-				11B2A86C23D2079000243255 /* SceneDelegate.swift in Sources */,
 				11A2252823D3285A0082E901 /* PokemonDetailsViewController.swift in Sources */,
 				11A2253923D5E8860082E901 /* PokemonDetailsInteractor.swift in Sources */,
 				11A2253023D457430082E901 /* PokemonsRouter.swift in Sources */,
@@ -419,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -473,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
